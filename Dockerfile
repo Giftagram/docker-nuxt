@@ -15,6 +15,9 @@ ONBUILD ENV autobuild ${autobuild}
 # Copy files.
 ONBUILD COPY . /app
 ONBUILD WORKDIR /app
+ONBUILD RUN apk update && \
+    apk upgrade && \
+    apk add git
 ONBUILD RUN npm install
 ONBUILD RUN if [ "${autobuild}" = "yes" ]; then ./node_modules/.bin/nuxt build; fi
 
